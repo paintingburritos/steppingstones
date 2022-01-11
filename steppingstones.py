@@ -69,11 +69,70 @@ def makeMove(board, move):
     validMoves = getMoves(board)
     if move in validMoves:
         board[move] = max([*board.values()]) + 1
-    
     return board
+
+def drawBoard(board):
+    maxDigits= len(str(max([*board.values()])))
+    minX = 0
+    maxX = 0
+    minY = 0
+    maxY = 0
     
+    for e in board:
+        if e[0] < minX:
+            minX = e[0]
+        elif e[0] > maxX:
+            maxX = e[0]
+        if e[1] < minY:
+            minY = e[1]
+        elif e[1] > maxY:
+            maxY = e[1]
+
+
+    tempBoard = [[0 for j in range(minX, maxX + 1)] for i in range(minY, maxY + 1)]
+    for e in board:
+        tempBoard[e[1] - minY][e[0] - minX] = board[e]
+    
+    drawStr = "      "
+    for i in range(minX, maxX + 1):
+        drawStr += " " * (maxDigits + 2 - len(str(i))) + str(i)
+    
+    drawStr += "\n"
+    for j, layer in enumerate(tempBoard):
+        drawStr += " " * (4 - len(str(j + minY))) + str(j + minY) + " |"
+
+        for e in layer:
+            if e == 0:
+                drawStr += " " * (maxDigits + 1) + "-"
+            else:
+                drawStr += " " * (maxDigits + 2 - len(str(e))) + str(e)
+        
+        drawStr += "\n"
+    
+    drawStr += "Legal moves: " + str(getMoves(board))
+    
+    print(drawStr)
+    
+    
+    
+
 
 test = {
     (0, 0): 1,
     (2, 2): 1,
 }
+
+drawBoard(test)
+running = True
+while running:
+    drawBoard(test)
+    userInput = input("x,y?")
+    if userInput == "exit":
+        break
+    try:
+        x = int(userInput.split(",")[0])
+        y = int(userInput.split(",")[1])
+        board = makeMove(test, (x, y))
+
+    except:
+        pass
