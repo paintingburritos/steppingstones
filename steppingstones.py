@@ -27,9 +27,6 @@ represents starting stones.
 A valid board has at least 1 starting stone on it {(0,0): 1}
 '''
 
-from typing import final
-
-
 offsets = [
     (1,-1),
     (1,1),
@@ -112,9 +109,6 @@ def drawBoard(board):
     drawStr += "Legal moves: " + str(getMoves(board))
     
     print(drawStr)
-    
-    
-    
 
 
 test = {
