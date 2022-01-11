@@ -4,8 +4,7 @@ user to explore by seeing valid options for this problem. The code will be a
 set of functions that act on a list of stones
 
 Rules:
-The "game" takes place on an theortically infinite grid, but for the purpose of
-simplicity this will take place on a finite m x m grid (50x50 default)
+The "game" takes place on an theortically infinite grid.
 
 In this, you can place "brown" stones, or base stones, and your goal is to
 place as many stone in sequential order for some n number of brown stones
