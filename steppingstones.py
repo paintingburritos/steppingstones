@@ -25,6 +25,8 @@ The board state will be a dictionary of coordinates and values. The value 1
 represents starting stones.
 A valid board has at least 1 starting stone on it {(0,0): 1}
 '''
+import copy
+
 
 offsets = [
     (1,-1),
@@ -115,17 +117,25 @@ test = {
     (2, 2): 1,
 }
 
-drawBoard(test)
+pastStates = []
 running = True
 while running:
+    
     drawBoard(test)
+
     userInput = input("x,y?")
     if userInput == "exit":
         break
-    try:
-        x = int(userInput.split(",")[0])
-        y = int(userInput.split(",")[1])
-        board = makeMove(test, (x, y))
+    elif userInput == "z":
+        test = pastStates[-1]
+        del pastStates[-1:]
+    else:
+        try:
+            x = int(userInput.split(",")[0])
+            y = int(userInput.split(",")[1])
+            pastStates.append(test.copy())
+            board = makeMove(test, (x, y))
+            
 
-    except:
-        pass
+        except:
+            pass
